@@ -50,6 +50,7 @@ Piston (http://piston.rubyforge.org/)
 
   piston import http://date-time-text-field-helpers.googlecode.com/svn/trunk/ vendor/plugins/date_time_text_field_helpers
 
+
 == Usage
 
 So instead of:
@@ -58,7 +59,7 @@ So instead of:
 	
 	or 
 	
-	date_select :person, :time_of_birth
+	time_select :person, :time_of_birth
 	
 	or
 	
@@ -77,7 +78,9 @@ use:
 	datetime_text_field :person, :date_and_time_of_birth
 
 
-These return the date parts as text fields i.e.
+== Example
+
+The helper return the date parts as text fields i.e.
 
 	date_text_field :person, :date_of_birth, :order => [:day, :month, :year], :blank => true
 	
@@ -91,7 +94,8 @@ returns this for a new person record
 		<input id="person_date_of_birth_1i" class="year_field" type="text" value="" size="3" name="person[date_of_birth(1i)]"/>
 	</span>	
 
-=== Options
+
+== Options
 
 Most of the options which can be used with the standard Rails date helpers apply
 including :order, :default, :include_seconds and so on.
