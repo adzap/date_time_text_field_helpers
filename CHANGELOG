@@ -1,3 +1,6 @@
+[2008-06-17]
+  - moved to http://github.com/adzap/date_time_text_field_helpers
+  
 [2008-02-25]
 	- changed default sizes for components to fix for safari
 	- updated README
