@@ -3,8 +3,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'spec/rake/spectask'
 
-desc 'Default: run unit tests.'
-task :default => :test
+desc 'Default: run specs'
+task :default => :spec
 
 spec_files = Rake::FileList["spec/**/*_spec.rb"]
 
@@ -19,13 +19,6 @@ Spec::Rake::SpecTask.new(:coverage) do |t|
   t.spec_files = spec_files
   t.rcov = true
   t.rcov_opts = ['--exclude', 'spec,/var/lib/gems']
-end
-
-desc 'Test the date_time_text_field_helpers plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
 end
 
 desc 'Generate documentation for the date_time_text_field_helpers plugin.'
