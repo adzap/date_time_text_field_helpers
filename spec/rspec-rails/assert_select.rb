@@ -1,4 +1,5 @@
 # This is a wrapper of assert_select for rspec.
+
 module Spec # :nodoc:
   module Rails
     module Matchers
