@@ -3,6 +3,7 @@ require 'rubygems'
 require 'spec'
 require 'spec/interop/test'
 
+require 'rails/version'
 require 'active_support'
 require 'action_controller'
 require 'action_controller/test_process'

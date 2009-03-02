@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe DateTimeTextFieldHelpers::FormHelpers do
-  
+  include DateTimeTextFieldHelpers::FormHelpers
+
   before do
     self.stub!(:params).and_return({})
   end
