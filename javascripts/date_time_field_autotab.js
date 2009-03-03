@@ -3,6 +3,8 @@
  
  I am no javascript pro so feel free to improve it and let me know. 
 */
+
+
 var AutoJumpToNextOnLength = Behavior.create({
   initialize: function(inputLength)
   {
@@ -12,25 +14,39 @@ var AutoJumpToNextOnLength = Behavior.create({
   },
   onkeydown: function(e)
   {
-    // Stops extra characters being entered    
-    if (this.keyRange.include(e.keyCode)) {
-      return !(this.element.getValue().length >= this.inputLength);
-    } else {
-      return true;
-    }
+      // Detect if there is selected text, if there is remove that selected text now.
+      selection = this.element.getValue().substring(this.element.selectionStart, this.element.selectionEnd).length
+
+      if (selection == 0) {
+	  // Stops extra characters being entered    
+	  if (this.keyRange.include(e.keyCode)) {
+	      return !(this.element.getValue().length >= this.inputLength);
+	  } else {
+	      return true;
+	  }
+      }
   },
   onkeyup: function(e)
   {
-    if (this.keyRange.include(e.keyCode) && (this.element.getValue().length == this.inputLength)) {  
-      try {
-        this.element.next().focus();
-      } catch(err) {
-        // No next field 
-        return false;
-      }
-    }
+      // Detect if there is selected text, if there is remove that selected text now.
+      selection = this.element.getValue().substring(this.element.selectionStart, this.element.selectionEnd).length
+
+      if (selection == 0) {
+
+	      if (this.keyRange.include(e.keyCode) && (this.element.getValue().length == this.inputLength)) {  
+		  try {
+		      this.element.next().focus();
+		      this.element.next().select();
+		  } catch(err) {
+		      // No next field 
+		      return false;
+		  }
+	      }
+	  }
   }
 });
+
+
 
 Event.addBehavior({'.day_field, .month_field, .hour_field, .minute_field, second_field' : AutoJumpToNextOnLength(2)});
 Event.addBehavior({'.year_field' : AutoJumpToNextOnLength(4)});
