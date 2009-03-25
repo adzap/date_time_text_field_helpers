@@ -9,7 +9,7 @@ multi-parameter field handling.
 Something I like about this plugin (coz I wanted the feature) is that it always 
 returns the user entered values when a form is redisplayed. This means that if
 the user enters garbage or an invalid date (requires date validation with 
-something like validates_date_time plugin), when form is redisplayed the values
+the validates_timeliness plugin), when form is redisplayed the values
 are as the user entered. This is so they can understand what they stuffed up 
 rather than just blank or a shifted date value which you get when you enter 30th
 February and have a date in March returned when using date_select. The shifted 
