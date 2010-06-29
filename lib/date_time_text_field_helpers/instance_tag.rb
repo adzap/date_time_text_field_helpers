@@ -85,7 +85,7 @@ module DateTimeTextFieldHelpers
           end)
       end
 
-      content_tag(:span, date_or_time_text_field, :class => options[:class], :id => "#{@object_name}_#{@method_name}")
+      content_tag(:span, date_or_time_text_field, {:class => options[:class], :id => "#{@object_name}_#{@method_name}"},false)
     end
     
     # Extracts field name with position as params key to find
@@ -107,8 +107,8 @@ module DateTimeTextFieldHelpers
       name_and_id_from_options(options, type)
       value = extract_field_param_value(options) || value
       size = case type
-        when :hour, :minute, :second : 2
-        when :year : 4
+        when :hour, :minute, :second then 2
+        when :year then 4
         else 2
       end
       datetime_text_field_html = %(<input type="text" id="#{options[:id]}" name="#{options[:name]}" size="#{size}" value="#{value}" class="#{options[:class]}" />)
