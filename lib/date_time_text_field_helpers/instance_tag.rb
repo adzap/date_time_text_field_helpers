@@ -113,7 +113,39 @@ module DateTimeTextFieldHelpers
         when :year then 4
         else 2
       end
-      datetime_text_field_html = %(<input type="text" id="#{options[:id]}" name="#{options[:name]}" size="#{size}" value="#{value}" class="#{options[:class]}" />)
+      label = case type
+        when :year   then 'YYYY'
+        when :month  then 'MM'
+        when :day    then 'DD'
+        when :hour   then 'HH'
+        when :minute then 'MM'
+        when :second then 'SS'
+      end
+      min = case type
+        when :month, :day then 1
+        else 0
+      end
+      max = case type
+        when :month then 12
+        when :day then 31
+        when :hour then 23
+        when :minute then 59
+        when :second then 59
+        else nil
+      end
+      attributes = {
+        :type => 'number',
+        :id => options[:id],
+        :name => options[:name],
+        :size => size,
+        :value => value,
+        :class => options[:class],
+        :placeholder => label,
+        :step => 1,
+        :min => min,
+        :max => max
+      }
+      tag 'input', attributes
     end
 
     if Rails::VERSION::STRING < '2.2'
