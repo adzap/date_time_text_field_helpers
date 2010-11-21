@@ -37,7 +37,8 @@ module DateTimeTextFieldHelpers
                    :date_separator => '-',
                    :time_separator => ':',
                    :date_time_separator => '&mdash;', 
-                   :class => 'date_time_field' }
+                   :class => 'date_time_field',
+                   :order => [:year, :month, :day] }
                    
       options  = defaults.merge(options)
       datetime = value(object)
@@ -45,7 +46,8 @@ module DateTimeTextFieldHelpers
 
       position = { :year => 1, :month => 2, :day => 3, :hour => 4, :minute => 5, :second => 6 }
 
-      order = (options[:order] ||= [:year, :month, :day])
+      options[:order].collect!(&:to_sym)
+      order = options[:order].dup
 
       # Discard explicit and implicit by not being included in the :order
       discard = {}
@@ -77,7 +79,7 @@ module DateTimeTextFieldHelpers
         date_or_time_text_field.insert(0, self.send(:text_field_for_date_part, param, datetime, options_with_prefix(position[param], options.merge(:use_hidden => discard[param]))))
         date_or_time_text_field.insert(0,
           case param
-            when :year, :month, :day then (discard[param] || order.index(param) == 0)  ? '' : " #{options[:date_separator]} "
+            when :year, :month, :day then (discard[param] || options[:order].index(param) == 0)  ? '' : " #{options[:date_separator]} "
             when :hour then (discard[:year] && discard[:day] ? "" : " #{options[:date_time_separator]} ")
             when :minute then " #{options[:time_separator]} "
             when :second then options[:include_seconds] ? " #{options[:time_separator]} " : ""          
