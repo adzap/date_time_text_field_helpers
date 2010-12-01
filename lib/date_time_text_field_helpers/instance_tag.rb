@@ -142,6 +142,7 @@ module DateTimeTextFieldHelpers
         :class => options[:class],
         :placeholder => label,
         :step => 1,
+        :maxlength => size,
         :min => min,
         :max => max
       }
