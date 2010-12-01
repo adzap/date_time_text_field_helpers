@@ -17,16 +17,26 @@ module DateTimeTextFieldHelpers
       hsh.each do |key, value|
         hsh[key] = if value.is_a?(Hash)
           normalize value
-        elsif key =~ /\(1i\)$/ && value =~ /^\d{2}$/
-          if value.to_i < @year_split
-            "20#{value}"
-          else
-            "19#{value}"
-          end
+        elsif key =~ /\([123]i\)$/
+          normalize_value key, value
         else
           value
         end
       end
+    end
+
+    # Will remove all non-numeric characters.
+    # Also converts 2-digit years to 4
+    def normalize_value(key, value)
+      value = value.gsub /\D+/, ''
+      
+      value = if value.to_i < @year_split
+        "20#{v}"
+      else
+        "19#{v}"
+      end if key =~ /\(1i\)$/ && value =~ /^\d{2}$/
+
+      value
     end
   end
 end
