@@ -107,9 +107,12 @@ module DateTimeTextFieldHelpers
       name_and_id_from_options(options, type)
       value = extract_field_param_value(options) || value
       size = case type
-        when :hour, :minute, :second : 2
-        when :year : 4
-        else 2
+        when :hour, :minute, :second
+          2
+        when :year
+          4
+        else
+          2
       end
       datetime_text_field_html = %(<input type="text" id="#{options[:id]}" name="#{options[:name]}" size="#{size}" value="#{value}" class="#{options[:class]}" />)
     end
